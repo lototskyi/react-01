@@ -1,4 +1,4 @@
-import {Component} from 'react';
+import {Component, StrictMode} from 'react';
 import logo from './logo.svg';
 import './App.css';
 
@@ -20,16 +20,15 @@ const Header = () => {
 class Field extends Component {
     render() {
         const holder = "Enter here";
-    const styledField = {
-        width: '300px'
-    }
+        const styledField = {
+            width: '300px'
+        }
 
-    return <input 
-            placeholder={holder} 
-            type='text' 
-            style={styledField}/>
-    }
-
+        return <input 
+                placeholder={holder} 
+                type='text' 
+                style={styledField}/>
+        }
 }
 
 function Btn() {
@@ -48,7 +47,9 @@ function Btn() {
 function App() {
   return (
     <div className="App">
-        <Header/>
+        <StrictMode>
+            <Header/>
+        </StrictMode>
         <Field/>
         <Btn/>
     </div>
