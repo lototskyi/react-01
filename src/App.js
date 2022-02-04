@@ -31,27 +31,21 @@ class Field extends Component {
         }
 }
 
-function Btn() {
-    const text = "Log in";
-    // const res = () => {
-    //     return "Log in";
-    // }
-
-    // const p = <p>Log in</p>
-
-    const logged = false;
-
-    return <button>{logged ? "Enter" : text}</button>
+function WhoAmI({name, surname, link}) {
+    //props are not changeble
+    return (
+        <div>
+            <h1>My name is {name.firstName}, surname - {surname()}</h1>
+            <a href={link}>My profile</a>
+        </div>
+    )
 }
 
 function App() {
   return (
     <div className="App">
-        <StrictMode>
-            <Header/>
-        </StrictMode>
-        <Field/>
-        <Btn/>
+        <WhoAmI name={{firstName: 'John'}} surname={() => {return 'Smith'}} link="https://facebook.com"/>
+        <WhoAmI name={{firstName: 'Alex'}} surname={() => {return 'Shepard'}} link="https://instagram.com"/>
     </div>
   );
 }
