@@ -31,14 +31,36 @@ class Field extends Component {
         }
 }
 
-function WhoAmI({name, surname, link}) {
-    //props are not changeble
-    return (
-        <div>
-            <h1>My name is {name.firstName}, surname - {surname()}</h1>
-            <a href={link}>My profile</a>
-        </div>
-    )
+//class component with states
+class WhoAmI extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            years: 27,
+            text: '+++'
+        }
+    }
+
+    nextYear = () => {
+        console.log('+++');
+        this.setState(state => ({ //use setState with callback function because setState is async function
+            years: state.years + 1
+        }));
+    }
+
+    render() {
+
+        const {name, surname, link} = this.props;
+        return (
+            <div>
+                <button onClick={this.nextYear}>{this.state.text}</button>
+                <h1>My name is {name.firstName}, surname - {surname()}, age - {this.state.years}</h1>
+                <a href={link}>My profile</a>
+            </div>
+        )
+    }
+   
 }
 
 function App() {
