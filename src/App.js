@@ -1,4 +1,4 @@
-import {Component, StrictMode} from 'react';
+import { Component, StrictMode, Fragment } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
@@ -67,12 +67,14 @@ class WhoAmI extends Component {
         })
     }
 
+    //empty tag <></> can also be used instead of <Fragment></Fragment>
+
     render() {
 
         const {name, surname, link} = this.props;
         const {position, years} = this.state;
         return (
-            <div>
+            <Fragment>
                 <button onClick={this.nextYear}>{this.state.text}</button>
                 {/* <button onClick={() => this.nextYear()}>{this.state.text}</button> 2nd way to use standard class functions */}
                 <h1>My name is {name.firstName}, surname - {surname()}, 
@@ -84,7 +86,7 @@ class WhoAmI extends Component {
                     <span>Fill in a position</span>
                     <input type="text" onChange={(e) => this.commitInputChanges(e, 'some color')}/> {/* the way to pass arguments */}
                 </form>
-            </div>
+            </Fragment>
         )
     }
    
