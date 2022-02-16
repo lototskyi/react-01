@@ -1,10 +1,11 @@
 import { Component, StrictMode, Fragment } from 'react';
+import styled from 'styled-components';
 import logo from './logo.svg';
 import './App.css';
 
-const Header = () => {
-    return <h2>Hello, World!</h2>
-}
+// const Header = () => {
+//     return <h2>Hello, World!</h2>
+// }
 
 // const Field = () => {
 //     const holder = "Enter here";
@@ -30,6 +31,34 @@ class Field extends Component {
                 style={styledField}/>
         }
 }
+
+const EmpItem = styled.div`
+    padding: 20px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    box-shadow: 5px 5px 10px rgba(0,0,0, .2);
+    a {
+        display: block;
+        margin: 10px 0 10px 0;
+        color: ${props => props.active ? 'orange' : 'black'};
+    }
+    input {
+        display: block;
+        margin-top: 10px;
+    }
+`;
+
+const Header = styled.h2`
+    font-size: 22px;
+`;
+
+export const Button = styled.button`
+    display: block;
+    padding: 5px 15px;
+    background-color: gold;
+    border: 1px solid rgba(0,0,0, .2);
+    box-shadow: 5px 5px 10px rgba(0,0,0, .2);
+`;
 
 //class component with states
 class WhoAmI extends Component {
@@ -74,30 +103,36 @@ class WhoAmI extends Component {
         const {name, surname, link} = this.props;
         const {position, years} = this.state;
         return (
-            <Fragment>
-                <button onClick={this.nextYear}>{this.state.text}</button>
+            <EmpItem active>
+                <Button onClick={this.nextYear}>{this.state.text}</Button>
                 {/* <button onClick={() => this.nextYear()}>{this.state.text}</button> 2nd way to use standard class functions */}
-                <h1>My name is {name.firstName}, surname - {surname()}, 
+                <Header>My name is {name.firstName}, surname - {surname()}, 
                     age - {years}, 
-                    position - {position}</h1>
+                    position - {position}</Header>
                 <a href={link}>My profile</a>
 
                 <form>
                     <span>Fill in a position</span>
                     <input type="text" onChange={(e) => this.commitInputChanges(e, 'some color')}/> {/* the way to pass arguments */}
                 </form>
-            </Fragment>
+            </EmpItem>
         )
     }
    
 }
 
+const Wrapper = styled.div`
+    width: 600px;
+    margin: 80px auto 0 auto;
+`;
+
+
 function App() {
   return (
-    <div className="App">
+    <Wrapper>
         <WhoAmI name={{firstName: 'John'}} surname={() => {return 'Smith'}} link="https://facebook.com"/>
         <WhoAmI name={{firstName: 'Alex'}} surname={() => {return 'Shepard'}} link="https://instagram.com"/>
-    </div>
+    </Wrapper>
   );
 }
 
