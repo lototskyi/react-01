@@ -1,5 +1,6 @@
-import { Component, StrictMode, Fragment } from 'react';
+import React, { Component, StrictMode, Fragment } from 'react';
 import styled from 'styled-components';
+import BootstrapTest from './BootstrapTest';
 import logo from './logo.svg';
 import './App.css';
 
@@ -126,10 +127,35 @@ const Wrapper = styled.div`
     margin: 80px auto 0 auto;
 `;
 
+const DynamicGreating = (props) => {
+    return (
+        <div className={'mb-3 p-3 border border-' + props.color}>
+            {
+                React.Children.map(props.children, child => {
+                    return React.cloneElement(child, {className: 'shadow p-3 m-3 border rounded'});
+                })
+            }
+        </div>
+    );
+}
 
 function App() {
   return (
     <Wrapper>
+        <BootstrapTest
+            left = {
+                <DynamicGreating color={'primary'}>
+                    <h2>This weel was hard</h2>
+                    <h2>Hello world</h2>
+                </DynamicGreating>
+            }
+            right = {
+                <DynamicGreating color={'primary'}>
+                    <h2>RIGHT</h2>
+                </DynamicGreating>
+            }
+        />
+
         <WhoAmI name={{firstName: 'John'}} surname={() => {return 'Smith'}} link="https://facebook.com"/>
         <WhoAmI name={{firstName: 'Alex'}} surname={() => {return 'Shepard'}} link="https://instagram.com"/>
     </Wrapper>
